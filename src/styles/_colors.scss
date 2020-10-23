@@ -1,0 +1,95 @@
+//========================================
+//                DEFINITIONS
+//========================================
+
+$primary-gray: #535657;
+$secondary-gray: #312F2F;
+$white: #fcfcfc;
+$emerald: #23CE6B;
+
+
+$horizon-yellow: #FFC938;
+$light-green: #88C249;
+$dark-green: #538B3E;
+$light-orange: #EB901B;
+$dark-orange: #EF6C22;
+$light-red: #EE4237;
+$dark-red: #C62629;
+$light-purple: #93406B;
+$dark-purple: #4A2D88;
+$light-magenta: #E91B63;
+$dark-magenta: #A42763;
+$light-cyan: #18BCD4;
+$dark-cyan: #0D8390;
+
+$colors-list: (
+	'primary-gray',
+	'secondary-gray',
+	'white',
+	'emerald',
+	'horizon-yellow',
+	'light-green',
+	'dark-green',
+	'light-orange',
+	'dark-orange',
+	'light-red',
+	'dark-red',
+	'light-purple',
+	'dark-purple',
+	'light-magenta',
+	'dark-magenta',
+	'light-cyan',
+	'dark-cyan'
+);
+
+$colors-list-vars: (
+	$primary-gray,
+	$secondary-gray,
+	$white,
+	$emerald,
+	$horizon-yellow,
+	$light-green,
+	$dark-green,
+	$light-orange,
+	$dark-orange,
+	$light-red,
+	$dark-red,
+	$light-purple,
+	$dark-purple,
+	$light-magenta,
+	$dark-magenta,
+	$light-cyan,
+	$dark-cyan
+);
+
+//========================================
+//                MIXINS
+//========================================
+
+@mixin propertyColor($input) {
+    $i: 1;//counter init
+    @each $item in $colors-list {
+        .#{$item} & {
+            #{$input}: nth($colors-list-vars, $i);  //use the position of colors-list to grab the equivilent color value
+        }
+        $i: $i + 1;  //counter
+    }
+}
+
+@mixin propertyThisColor($input) {
+    $i: 1;//counter init
+    @each $item in $colors-list {
+        &.#{$item} {
+            #{$input}: nth($colors-list-vars, $i);  //use the position of colors-list to grab the equivilent color value
+        }
+        $i: $i + 1;  //counter
+    }
+}
+
+.background-color {
+	@include propertyThisColor(background-color);
+}
+
+.font-color {
+	@include propertyThisColor(color);
+}

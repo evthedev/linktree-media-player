@@ -1,18 +1,7 @@
-@import 'styles/_grids.scss';
-@import 'styles/_colors.scss';
+@import '../node_modules/antd/dist/antd.css';
+
 @import 'styles/_utilities.scss';
 @import 'styles/_typography.scss';
-
-@font-face {
-  font-family: "Proxima Nova";
-  src: url("./assets/fonts/ProximaNova/Proxima-Nova.otf") format("opentype");
-}
-
-@font-face {
-  font-family: "Proxima Nova";
-  font-weight: bold;
-  src: url("./assets/fonts/ProximaNova/Proxima-Nova-Bold.otf") format("opentype");
-}
 
 .App {
   text-align: center;

@@ -1,0 +1,43 @@
+{
+	"backgroundColor": "darkgreen",
+	"fontColor": "lightgreen",
+	"results": [
+		{
+			"id": 1,
+			"title": "Run Away with Me",
+			"services": [
+				{
+					"id": 1,
+					"providerName": "Spotify",
+					"trackUrl": "https://open.spotify.com/embed/track/4vZUgDuew0aCUlrhfYVwA1"
+				},
+				{
+					"id": 2,
+					"providerName": "Soundcloud",
+					"trackUrl": "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/253476670"
+				},
+				{
+					"id": 3,
+					"providerName": "Apple Music",
+					"trackUrl": "https://embed.music.apple.com/us/album/run-away-with-me-remixes-ep/1444844869"
+				}
+			]
+		},
+		{
+			"id": 2,
+			"title": "New Rules",
+			"services": [
+				{
+					"id": 1,
+					"providerName": "Spotify",
+					"trackUrl": "https://open.spotify.com/embed/track/2ekn2ttSfGqwhhate0LSR0"
+				},
+				{
+					"id": 2,
+					"providerName": "Soundcloud",
+					"trackUrl": "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/325519648"
+				}
+			]
+		}
+	]
+}

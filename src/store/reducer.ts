@@ -1,23 +1,19 @@
 import { defaultState } from '../common/defaults';
 import { IState } from '../interfaces/interfaces';
-import { actionTypes, SET_LINKS, SET_MUSIC, SET_SHOWS } from './constants';
+import { actionTypes, SET_MEDIA_BUTTON_STYLES, SET_MEDIA_DATA } from './constants';
 
 export const reducer = (state: IState = defaultState, action: actionTypes): IState => {
 	switch (action.type) {
-		case SET_LINKS:
+		case SET_MEDIA_DATA:
 			return {
 				...state,
-				links: action.payload
+				mediaData: action.payload
 			}	
-		case SET_SHOWS:
+		case SET_MEDIA_BUTTON_STYLES:
 			return {
 				...state,
-				shows: action.payload
-			}	
-		case SET_MUSIC:
-			return {
-				...state,
-				music: action.payload
+				backgroundColor: action.payload.backgroundColor,
+				fontColor: action.payload.fontColor
 			}	
 		default:
 			return state		

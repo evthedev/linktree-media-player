@@ -1,15 +1,22 @@
-import { DefaultColors, MusicProvider, MediaType } from '../common/constants';
+import { MediaType, MusicProvider } from '../common/constants';
 
 export interface IRoute {
 	path: string;
 	exact: boolean;
 	sidebar: string;
-	icon: React.FC,
-	main: any
+	icon: any,
+	main: React.FC
 }
 
 export interface IMediaOwnProps {
-	type: MediaType.Classic | MediaType.Music | MediaType.Show
+	commandHandler: ICommandHandler
+}
+
+export interface IMediaButtonOwnProps {
+	backgroundColor: string;
+	fontColor: string;
+	media: IMedia,
+	subComponent?: React.FC<IMusic | IShow>
 }
 
 export interface IMediaBaseProps {
@@ -17,12 +24,22 @@ export interface IMediaBaseProps {
 	fontColor: string;
 }
 
-export interface IClassic extends IMediaBaseProps {
+export interface IClassicLink {
 	id: number;
-	link: string
+	title: string;
+	link: string;
 }
 
-export interface IShow extends IMediaBaseProps {
+export interface IClassicLinkData extends IMediaBaseProps {
+	results: IClassicLink[]
+}
+export interface IShow {
+	id: number;
+	title: string;
+	showDetails: IShowDetails[];
+}
+
+export interface IShowDetails {
 	id: number;
 	date: string;
 	location: string;
@@ -30,47 +47,43 @@ export interface IShow extends IMediaBaseProps {
 	ticketsAvailable: number
 }
 
-export interface IMusic extends IMediaBaseProps {
+export interface IShowData extends IMediaBaseProps {
+	results: IShow[]
+}
+
+export interface IMusic {
 	id: number;
+	title: string;
 	services: IService[]
 }
+
+export interface IMusicData extends IMediaBaseProps {
+	results: IMusic[]
+}
+
 export interface IService {
 	id: number;
-	providerName: MusicProvider;
+	providerName: string;
 	trackUrl: string
 }
 
-// export interface IAddress {
-// 	id: number;
-// 	quarantine_address: string;
-// 	quarantine_address_lat: number | string;
-// 	quarantine_address_long: number | string;
-// }
-// export interface ISanitisedAddress {
-// 	id: number;
-// 	quarantineAddress: string;
-// 	quarantineAddressLat: number;
-// 	quarantineAddressLong: number;
-// }
-
-// export interface ISanitisedUser {
-// 	date: string;
-// 	arrivedTravellers: number;
-// 	totalUsersProvidedConsent: number;
-// 	travellersArrivedAndProvidedConsent: number;
-// 	travellersArrivedAndCompletedSetup: number;
-// }
-
-// export interface IPill {
-// 	backgroundColor: DefaultColors
-// }
-
 export interface IState {
-	links: IClassic[],
-	shows: IShow[],
-	music: IMusic[]
+	backgroundColor: string,
+	fontColor: string,
+	mediaData: IClassicLink[] | IShow[] | IMusic[]
 }
 
-// export interface IMapProps {
-// 	addresses: ISanitisedAddress[]
-// }
+export interface ICommandHandler {
+	mediaType: MediaType;
+	data: IClassicLinkData | IShowData | IMusicData,
+	mainComponent: React.FC<IMediaButtonOwnProps>
+	subComponent?: React.FC<IMusic | IShow>
+}
+
+export interface IPlayer {
+	musicProvider: MusicProvider,
+	logo: string,
+	component: React.FC<string>
+}
+
+export type IMedia = IClassicLink | IMusic | IShow

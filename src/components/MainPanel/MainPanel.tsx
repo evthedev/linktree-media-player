@@ -1,18 +1,14 @@
 import React, { useState } from 'react';
-import { Switch, Route, BrowserRouter as Router, Link } from 'react-router-dom';
-import { Layout, Typography, Row, Col, Avatar, Menu } from 'antd';
-import {
-	MenuUnfoldOutlined,
-	MenuFoldOutlined,
-	UserOutlined,
-	VideoCameraOutlined,
-	UploadOutlined,
-  } from '@ant-design/icons';
+import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
+import { Layout, Avatar, Drawer } from 'antd';
 
-import { Wrapper } from '../../common/styles';
-import { routes } from '../../common/routes';
+import linktreeAvatar from '../../assets/images/linktree-avatar@2x.png';
+import linktreeLogo from '../../assets/images/brand-logo@2x.png';
 
-const { Content, Footer, Sider, Header } = Layout;
+import { Hamburger, StyledLink } from '../../common/styles';
+import { routes } from '../../config/routes';
+
+const { Content, Footer, Header } = Layout;
 
 export const MainPanel: React.FC = (): JSX.Element => {	
 
@@ -20,27 +16,27 @@ export const MainPanel: React.FC = (): JSX.Element => {
 	
 	return (
 		<Router>
-
-			<Layout className="layout" style={{height: '100vh'}}>
-				<Sider trigger={null} collapsible collapsed={collapsed}>
-					<div className="logo" />
-					<Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-						{ routes.map(route => (
-							<Menu.Item key={route.path} icon={route.icon}>
-								<Link to={route.path}><h4 className='font-color white t400'>{route.sidebar}</h4></Link>
-							</Menu.Item>
-						))}
-					</Menu>
-				</Sider>
-				<Layout className="layout" style={{height: '100vh'}}>
-					{React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
-						className: 'trigger',
-						onClick: () => setCollapsed(!collapsed),
-					})}
-					<Header>
-						<Avatar size={64} src='' />
+			<Layout className="layout" style={{background: 'transparent'}}>
+				<Drawer
+					placement='left'
+					keyboard={true}
+					closable={false}
+					maskClosable={true}
+					onClose={() => setCollapsed(true)}
+					visible={!collapsed}
+					width={150}
+				>
+					{ routes.map((route, index) => (
+						<StyledLink to={route.path} key={index}><span className='h5' onClick={() => setCollapsed(true)}>{route.icon} {route.sidebar}</span></StyledLink>
+					)) }
+				</Drawer>
+				<Layout className="layout text-center" style={{maxWidth: '320px', width: '100%', background: 'transparent', margin: '50px auto'}}>
+					<Hamburger onClick={() => setCollapsed(!collapsed) } />
+					<Header style={{background: 'transparent', height: 'auto'}}>
+						<Avatar size={64} src={linktreeAvatar} />
+						<h6>@da_funk_soul_brotha</h6>
 					</Header>
-					<Content style={{ padding: '0 50px' }}>
+					<Content style={{paddingTop: '10px', marginBottom: '50px'}}>
 						<Switch>
 							{routes.map((route, index) => (
 								<Route
@@ -52,29 +48,11 @@ export const MainPanel: React.FC = (): JSX.Element => {
 							))}
 						</Switch>
 					</Content>
-					<Footer style={{ textAlign: 'center' }}>Linktree logo</Footer>
+					<Footer style={{ textAlign: 'center', background: 'transparent' }}>
+						<img className="brand-logo" src={linktreeLogo} style={{ maxWidth: '85px'}}alt="brand-logo"/>
+					</Footer>
 				</Layout>
 			</Layout>
-{/* 
-			<Wrapper>
-				<div className="container__row">
-					<div className="container__col-12 container__col-md-3 container__col-lg-2 background-color secondary-gray text-center padding-t-3">
-						<SideMenu />
-					</div>
-					<div className="container__col-12 container__col-md-9 container__col-lg-10">
-					<Switch>
-						{routes.map((route, index) => (
-							<Route
-								key={index}
-								path={route.path}
-								exact={route.exact}
-								children={route.main()}
-							/>
-						))}
-					</Switch>
-					</div>
-				</div>					
-			</Wrapper> */}
 		</Router>
 	)
 }

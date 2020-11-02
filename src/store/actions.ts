@@ -1,29 +1,40 @@
-import { IClassic, IMusic, IShow } from '../interfaces/interfaces';
-import { actionTypes, GET_LINKS, GET_MUSIC, GET_SHOWS, SET_LINKS, SET_MUSIC, SET_SHOWS } from "./constants";
+import { Dispatch } from 'react';
+import { IClassicLink, IMediaBaseProps, IMusic, IShow } from '../interfaces/interfaces';
+import { actionTypes, SET_MEDIA_BUTTON_STYLES, SET_MEDIA_DATA } from "./constants";
+import { MediaType } from '../common/constants';
+import { commandHandlers } from '../config/commandHandlers';
 
-export const getLinks = (): actionTypes => ({
-	type: GET_LINKS,
+export const setMediaButtonStyles = (mediaButtonStyles: IMediaBaseProps): actionTypes => ({
+	type: SET_MEDIA_BUTTON_STYLES,
+	payload: mediaButtonStyles
 })
 
-export const getShows = (): actionTypes => ({
-	type: GET_SHOWS,
+export const setMediaData = (mediaData: IClassicLink[] | IShow[] | IMusic[]): actionTypes => ({
+	type: SET_MEDIA_DATA,
+	payload: mediaData
 })
 
-export const getMusic = (): actionTypes => ({
-	type: GET_MUSIC,
-})
+export const clearData = () => (
+	(dispatch: Dispatch<actionTypes>) => {
+		dispatch(setMediaData([]));
+	}
+)
 
-export const setLinks = (links: IClassic[]): actionTypes => ({
-	type: SET_LINKS,
-	payload: links
-})
+export const fetchFakeMedia = (type: MediaType) => (
+	async (dispatch: Dispatch<actionTypes>) => {
+		// Get actionHandler for the specific media type
+		
+		// Get data for the specific media type
+		const data = commandHandlers.filter(commandHandler => commandHandler.mediaType === type)[0].data;
+		
+		// Use a delay to simulate a delay when fetching from 'server'
+		setTimeout(() => {
+			dispatch(setMediaButtonStyles({
+				backgroundColor: data.backgroundColor,
+				fontColor: data.fontColor
+			}))
+			dispatch(setMediaData(data.results))
+		}, 200)
 
-export const setShows = (shows: IShow[]): actionTypes => ({
-	type: SET_SHOWS,
-	payload: shows
-})
-
-export const setMusic = (music: IMusic[]): actionTypes => ({
-	type: SET_MUSIC,
-	payload: music
-})
+	}
+)

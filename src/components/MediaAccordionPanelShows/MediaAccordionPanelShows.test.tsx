@@ -2,7 +2,7 @@ import React from 'react';
 import Enzyme, { mount } from 'enzyme';
 import { BrowserRouter as Router } from 'react-router-dom';
 import EnzymeAdapter from 'enzyme-adapter-react-16';
-import { MediaPanel } from './MediaPanel';
+import { MediaButton } from './MediaButton';
 import { IState } from '../../interfaces/interfaces';
 import { createStore } from 'redux';
 import { reducer } from '../../store/reducer';
@@ -21,7 +21,7 @@ describe.skip('<SideMenu /> component', () => {
         const getWrapper = (mockStore = createStore(reducer, mockInitialState)) => mount(
                 <Provider store={mockStore}>
                         <Router>
-                                <MediaPanel type={ MediaType.Music }/>
+                                {/* <MediaButton type={ MediaType.Music }/> */}
                         </Router>
                 </Provider>
         )

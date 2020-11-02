@@ -1,19 +1,29 @@
-import React, { Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Fragment, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { routes } from '../../common/routes';
-import { IMediaOwnProps } from '../../interfaces/interfaces';
+import { IMediaOwnProps, IState, IMedia } from '../../interfaces/interfaces';
+import { clearData, fetchFakeMedia } from '../../store/actions';
 
-export const MediaPanel: React.FC<IMediaOwnProps> = (): JSX.Element => {
-	
+export const MediaPanel: React.FC<IMediaOwnProps> = (props): JSX.Element => {
+
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(fetchFakeMedia(props.commandHandler.mediaType))
+		return(() => {
+			dispatch(clearData())
+		})
+	}, [props.commandHandler.mediaType, dispatch])
+
+	const backgroundColor = useSelector((state: IState) => state.backgroundColor)
+	const fontColor = useSelector((state: IState) => state.fontColor)
+	const mediaData = useSelector((state: IState) => state.mediaData)
+
 	return (
 		<Fragment>
-			
-			<ul style={{ listStyleType: "none", padding: 0 }}>
-				{ routes.map(route => (
-					<li className='margin-t-3 margin-b-3' key={route.path}><Link to={route.path} className='padding-t-3 padding-b-3'><h4 className='font-color white t400'>{route.icon}&nbsp;&nbsp; {route.sidebar}</h4></Link></li>
-				))}
-			</ul>
+			{ (mediaData as Array<IMedia>).map((media: IMedia) => (
+				props.commandHandler.mainComponent({ backgroundColor, fontColor, media, subComponent: props.commandHandler.subComponent })
+			))}
 		</Fragment>
 	)
 }

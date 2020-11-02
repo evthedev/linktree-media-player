@@ -1,0 +1,66 @@
+{
+	"backgroundColor": "purple",
+	"fontColor": "yellow",
+	"results": [
+		{
+			"id": 1,
+			"title": "What The Funk",
+			"showDetails": [
+				{
+					"id": 1,
+					"date": "Oct 22 2011",
+					"location": "Melbourne",
+					"url": "http://show1link1.com.au",
+					"ticketsAvailable": 3
+				},
+				{
+					"id": 2,
+					"date": "Oct 24 2011",
+					"location": "Geelong",
+					"url": "http://show1link2.com.au",
+					"ticketsAvailable": 9
+				},
+				{
+					"id": 3,
+					"date": "Oct 29 2011",
+					"location": "New York",
+					"url": "http://show1link4.com.au",
+					"ticketsAvailable": 0
+				}
+			]
+		},
+		{
+			"id": 2,
+			"title": "Show me the money",
+			"showDetails": [
+				{
+					"id": 1,
+					"date": "Nov 27 2011",
+					"location": "Newcastle",
+					"url": "http://show2link1.com.au",
+					"ticketsAvailable": 30
+				},
+				{
+					"id": 2,
+					"date": "Nov 29 2011",
+					"location": "Perth",
+					"url": "http://show2link2.com.au",
+					"ticketsAvailable": 0
+				}
+			]
+		},
+		{
+			"id": 3,
+			"title": "Supernova",
+			"showDetails": [
+				{
+					"id": 1,
+					"date": "Oct 27 2011",
+					"location": "Sydney",
+					"url": "http://show3link6.com.au",
+					"ticketsAvailable": 23
+				}
+			]
+		}
+	]
+}

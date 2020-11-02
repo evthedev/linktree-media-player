@@ -1,46 +1,54 @@
-h1, h2, h3, h4, h5, h6 {
-	font-family: 'Proxima Nova';
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
+	font-family: 'Karla';
 	font-style: normal;
-	font-weight: bold;
-	letter-spacing: -0.015em;
+	font-weight: normal;
+	letter-spacing: -0.6px;
+	margin-bottom: 0.5em;
+	line-height: 2;
 	color: #535657;
+	display: block;
 }
 
-h1 {
-	font-size: 30px;
+h1, .h1 {
+	font-size: 64px;
 }
 
-h2 {
+h2, .h2 {
+	font-size: 48px;
+}
+
+h3, .h3 {
+	font-size: 32px;
+}
+
+h4, .h4 {
 	font-size: 24px;
 }
 
-h3 {
+h5, .h5 {
 	font-size: 20px;
 }
 
-h4 {
+h6, .h6 {
 	font-size: 16px;
 }
 
-h5 {
+h7, .h7 {
 	font-size: 14px;
 }
 
-h6 {
+h8, .h8 {
 	font-size: 12px;
 }
 
 p, body {
-	font-family: 'Proxima Nova', sans-serif;
+	font-family: 'Karla', sans-serif;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 14px;
+	letter-spacing: -0.6px;
 }
 
 a {
 	text-decoration: none;
-}
-
-.t400 {
-	font-weight: 400;
 }

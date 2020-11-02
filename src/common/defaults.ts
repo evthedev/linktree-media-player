@@ -1,7 +1,15 @@
-import { IState } from '../interfaces/interfaces';
+import { IState, IService } from '../interfaces/interfaces';
+import { DefaultColors } from './constants';
 
 export const defaultState: IState = {
-	links: [],
-	shows: [],
-	music: []
+	backgroundColor: DefaultColors.emerald,
+	fontColor: DefaultColors.defaultGray,
+	mediaData: []
 }
+
+export const defaultService: IService = {
+	id: 1,
+	providerName: 'No service provided',
+	trackUrl: ''
+}
+

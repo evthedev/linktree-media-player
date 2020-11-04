@@ -21,7 +21,12 @@ export const MediaAccordionPanelShows: React.FC<IMusic | IShow> = (props): JSX.E
 	return (
 		<Fragment>			
 			{ showDetails && showDetails.map(showDetailsItem =>
-				<MediaStyledPanel className="media-panel__panel" key={showDetailsItem.id} onClick={() => handlePanelClick(showDetailsItem)}>
+				<MediaStyledPanel
+					className="media-panel__panel"
+					onClick={() => handlePanelClick(showDetailsItem)}	
+					data-testid='media-accordion-panel-shows' 
+					key={showDetailsItem.id}					
+				>
 					<div className="media-panel__details">
 						<h6 className="media-panel__date">{ showDetailsItem.date }</h6>
 						<h6 className="media-panel__location h8">{ showDetailsItem.location }</h6>

@@ -28,7 +28,12 @@ export const MediaAccordionPanelMusic: React.FC<IMusic | IShow> = (props): JSX.E
 		<Fragment>			
 			{ playerComponent && playerComponent(activeService.trackUrl) }
 			{ services && services.map(servicesItem =>
-				<MediaStyledPanel className="media-panel__panel" key={servicesItem.id} onClick={() => handlePanelClick(servicesItem)}>
+				<MediaStyledPanel
+					className="media-panel__panel"
+					key={servicesItem.id}
+					onClick={() => handlePanelClick(servicesItem)}
+					data-testid='media-accordion-panel-music'
+				>
 					<img className="media-panel__icon" src={ players.find(({musicProvider}) => musicProvider === servicesItem.providerName)?.logo } alt={servicesItem.providerName} />
 					<h6 className="media-panel__title">{ servicesItem.providerName }</h6>
 					<img className="media-panel__arrow" src={iconRightArrow} alt="icon-right-arrow"/>

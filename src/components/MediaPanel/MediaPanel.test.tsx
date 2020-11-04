@@ -1,34 +1,71 @@
 import React from 'react';
-import Enzyme, { mount } from 'enzyme';
-import { BrowserRouter as Router } from 'react-router-dom';
-import EnzymeAdapter from 'enzyme-adapter-react-16';
-import { MediaPanel } from './MediaPanel';
-import { IState } from '../../interfaces/interfaces';
-import { createStore } from 'redux';
-import { reducer } from '../../store/reducer';
+import { applyMiddleware, createStore } from 'redux';
+import { MemoryRouter } from "react-router-dom";
 import { Provider } from 'react-redux';
-import { MediaType } from '../../common/constants';
+import { render, cleanup, screen, fireEvent } from '@testing-library/react';
+import thunk from 'redux-thunk';
 
-Enzyme.configure({ adapter: new EnzymeAdapter()});
+import { IState } from '../../interfaces/interfaces';
+import { reducer } from '../../store/reducer';
 
-describe.skip('<SideMenu /> component', () => {
-        const mockInitialState: IState = {
-                backgroundColor: '',
-                fontColor: '',
-                mediaData: [],
-        }
+import { MainPanel } from '../MainPanel/MainPanel';
 
-        const getWrapper = (mockStore = createStore(reducer, mockInitialState)) => mount(
-                <Provider store={mockStore}>
-                        <Router>
-                                <MediaPanel type={ MediaType.Music }/>
-                        </Router>
-                </Provider>
-        )
-        it('should mount correctly with menu items', () => {
-                const wrapper = getWrapper();
-                expect(wrapper.isEmptyRender()).toBe(false);
-                expect(wrapper).toMatchSnapshot();
-                expect(wrapper.find('h4').length).toEqual(6);
+import { testClassicLinksState, testMusicState, testShowsState } from '../../common/testData';
+
+afterEach(cleanup);
+
+const renderWithMemoryRouter = (routes: string[], initialState: IState) => render(
+	<Provider store={createStore(reducer, initialState, applyMiddleware(thunk))}>
+		<MemoryRouter initialEntries={routes}>
+			<MainPanel />
+		</MemoryRouter>
+	</Provider>
+);
+
+describe('<MediaPanel /> component', () => {
+	
+	// We test it this way because we know that it renders the media buttons or accordions, it is rendering the components specified in /config/routes.tsx and /config/commandHandlers correctly
+	
+	beforeEach(() => {
+		const root = document.createElement('div');
+		document.body.appendChild(root);
+	});
+
+	it('Should load classic links page with 2 media buttons with correct colors on "/" route', () => {
+		renderWithMemoryRouter(['/'], testClassicLinksState);
+		
+		expect(screen.getAllByTestId('media-button')).toHaveLength(2);
+		expect(screen.getAllByTestId('media-button')[0]).toHaveStyle(`
+			background-color: black,
+			color: darkgray
+		`);
+	})
+
+	it('Should load shows page with 3 accordion buttons with correct colors on "/shows" route', () => {
+		renderWithMemoryRouter(['/shows'], testShowsState);
+		
+		expect(screen.getAllByTestId('media-accordion')).toHaveLength(3);
+		fireEvent.click(screen.getByText(/Test show 1/i));
+		
+		expect(screen.getAllByTestId('media-accordion-panel-shows')).toHaveLength(2);
+		expect(screen.getByText(/Test show 1/i)).toHaveStyle(`
+			background-color: gold,
+			color: cyan
+		`);
+		expect(screen.getAllByTestId('media-accordion')[0]).toHaveTextContent('Test venue 1');
+	})
+
+	it('Should load music page with 2 accordion buttons with correct colors on "/music" route', () => {
+		renderWithMemoryRouter(['/music'], testMusicState);
+		
+		expect(screen.getAllByTestId('media-accordion')).toHaveLength(2);
+		fireEvent.click(screen.getByText(/Test song 1/i));
+		
+		expect(screen.getAllByTestId('media-accordion-panel-music')).toHaveLength(1);
+		expect(screen.getByText(/Test song 1/i)).toHaveStyle(`
+			background-color: azure,
+			color: aquamarine
+		`);
+		expect(screen.getAllByTestId('media-accordion')[0]).toHaveTextContent('Test song 1');
 	})
 })

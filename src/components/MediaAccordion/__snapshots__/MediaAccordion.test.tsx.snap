@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MediaAccordion /> component should mount correctly with menu items 1`] = `ReactWrapper {}`;

@@ -13,8 +13,9 @@ export const MediaButton: React.FC<IMediaButtonOwnProps> = (props): JSX.Element 
 			backgroundColor={props.backgroundColor}
 			key={media.id}
 			onClick={() => {window.open(media.link)}}
+			data-testid="media-button"
 		>
-			<span>{media.title}</span>
+			<span >{media.title}</span>
 		</StyledMediaButton>
 	)
 }

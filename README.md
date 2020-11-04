@@ -10,8 +10,6 @@ $ npm test
 
 ## Approach
 * Technologies used: React (React Hooks), Typescript, Redux, Styled Components, Ant Design UI library.
-* The app imports data directly from either a Ts or Json file, instead of reading off a CSV file.
+* Players in the music screens are native embeds, and so the designs are rendered by the providers' API.
 
-## Possible areas of improvement
-* Better mock Jest dispatch functions in tests
 

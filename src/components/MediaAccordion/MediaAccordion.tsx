@@ -10,10 +10,22 @@ export const MediaAccordion: React.FC<IMediaButtonOwnProps> = React.memo((props)
 	const media = props.media as IMusic | IShow;
 	
 	return (
-		<Collapse accordion={false} bordered={false} ghost={true} key={media.id} >
-			<StyledPanel header={props.media.title} key={media.id} showArrow={false} {...props}>
-				{ props.subComponent && props.subComponent(media) }
-			</StyledPanel>
-		</Collapse>
+		<div data-testid="media-accordion">
+			<Collapse				
+				accordion={false}
+				bordered={false}
+				ghost={true}
+				key={media.id}
+			>
+				<StyledPanel
+					header={props.media.title}
+					key={media.id}
+					showArrow={false}
+					{...props}
+				>
+					{ props.subComponent && props.subComponent(media) }
+				</StyledPanel>
+			</Collapse>
+		</div>
 	)
 });

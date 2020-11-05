@@ -33,6 +33,7 @@ export interface IClassicLink {
 export interface IClassicLinkData extends IMediaBaseProps {
 	results: IClassicLink[]
 }
+
 export interface IShow {
 	id: number;
 	title: string;

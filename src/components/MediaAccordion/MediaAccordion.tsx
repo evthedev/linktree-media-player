@@ -10,7 +10,7 @@ export const MediaAccordion: React.FC<IMediaButtonOwnProps> = React.memo((props)
 	const media = props.media as IMusic | IShow;
 	
 	return (
-		<div data-testid="media-accordion">
+		<div data-testid="media-accordion"> {/* React Testing Library seems to need a surrounding div to be able to render the data-testid attribute */}
 			<Collapse				
 				accordion={false}
 				bordered={false}

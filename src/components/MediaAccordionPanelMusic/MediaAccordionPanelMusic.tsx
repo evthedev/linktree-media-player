@@ -9,14 +9,15 @@ import { defaultService } from '../../common/defaults';
 
 export const MediaAccordionPanelMusic: React.FC<IMusic | IShow> = (props): JSX.Element => {
 
+	// This component receives a union type of 'IMusic | IShow', but the commandhandler dictates that this component only handles IMusic media type, and we typecast accordingly
 	const { services } = props as IMusic;
 
 	const [ activeService, setActiveService ] = useState<IService>(defaultService);
 	
-	const playerComponent = players.find(({musicProvider}) => musicProvider === activeService.providerName)?.component;
+	const playerComponent = players.find(({musicProvider}) => musicProvider === activeService.providerName)?.component; // we assume that the player object is always defined in config
 
 	useEffect(() => {
-		// set first item of services as the embedded player
+		// we assume that onload, we always use the first item in services as the embedded player
 		setActiveService(services[0]);
 	}, [services]);
 
@@ -34,7 +35,7 @@ export const MediaAccordionPanelMusic: React.FC<IMusic | IShow> = (props): JSX.E
 					onClick={() => handlePanelClick(servicesItem)}
 					data-testid='media-accordion-panel-music'
 				>
-					<img className="media-panel__icon" src={ players.find(({musicProvider}) => musicProvider === servicesItem.providerName)?.logo } alt={servicesItem.providerName} />
+					<img className="media-panel__icon" src={ players.find(({musicProvider}) => musicProvider === servicesItem.providerName)!.logo } alt={servicesItem.providerName} /> {/* We assume the player object is always defined in config */}
 					<h6 className="media-panel__title">{ servicesItem.providerName }</h6>
 					<img className="media-panel__arrow" src={iconRightArrow} alt="icon-right-arrow"/>
 				</MediaStyledPanel>

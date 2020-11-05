@@ -30,21 +30,25 @@ export const players: IPlayer[] = [
 	{
 		musicProvider: MusicProvider.YoutubeMusic,
 		logo: youtubeLogo,
+		// @TODO: Use correct player embed code
 		component: (trackUrl: string) => <iframe src={trackUrl} width="300" height="380" frameBorder="0" title="Youtube" allow="encrypted-media"></iframe>
 	},
 	{
 		musicProvider: MusicProvider.Deezer,
 		logo: deezerLogo,
+		// @TODO: Use correct player embed code
 		component: (trackUrl: string) => <iframe src={trackUrl} width="300" height="380" frameBorder="0" title="Deezer" allow="encrypted-media"></iframe>
 	},
 	{
 		musicProvider: MusicProvider.Tidal,
 		logo: tidalLogo,
+		// @TODO: Use correct player embed code
 		component: (trackUrl: string) => <iframe src={trackUrl} width="300" height="380" frameBorder="0" title="Tidal" allow="encrypted-media"></iframe>
 	},
 	{
 		musicProvider: MusicProvider.Bandcamp,
 		logo: bandcampLogo,
+		// @TODO: Use correct player embed code
 		component: (trackUrl: string) => <iframe src={trackUrl} width="300" height="380" frameBorder="0" title="Bandcamp" allow="encrypted-media"></iframe>
 	},
 ];

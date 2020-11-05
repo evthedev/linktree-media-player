@@ -12,6 +12,10 @@ import { MediaButton } from '../components/MediaButton/MediaButton';
 import { MediaAccordion } from '../components/MediaAccordion/MediaAccordion';
 import { MediaAccordionPanelShows } from '../components/MediaAccordionPanelShows/MediaAccordionPanelShows';
 
+/**
+ * Following the composition pattern, this is where we drive the usage of specific components , depending on the media type.
+ * For example, a music type media gets MediaAccordion as its main component, and MediaAccordionPanelMusic as its subcomponent
+ */
 export const commandHandlers: ICommandHandler[] = [
 	{
 		mediaType: MediaType.Classic,

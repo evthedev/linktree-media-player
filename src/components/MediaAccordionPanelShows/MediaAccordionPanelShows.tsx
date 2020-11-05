@@ -7,6 +7,7 @@ import iconRightArrow from '../../assets/images/icon-right-arrow@2x.png';
 
 export const MediaAccordionPanelShows: React.FC<IMusic | IShow> = (props): JSX.Element => {
 
+	// This component receives a union type of 'IMusic | IShow', but the commandhandler dictates that this component only handles IShow media type, and we typecast accordingly
 	const { showDetails } = props as IShow;
 
 	const isAvailable = (showDetailsItem: IShowDetails): boolean => showDetailsItem.ticketsAvailable > 0
@@ -15,6 +16,7 @@ export const MediaAccordionPanelShows: React.FC<IMusic | IShow> = (props): JSX.E
 		if (!isAvailable(showDetailsItem)) {
 			return false;
 		}
+		// We assume that clicking the event takes us to an external booking page
 		window.open(showDetailsItem.url);
 	}
 	

@@ -16,20 +16,20 @@ export const routes: IRoute[] = [
 	  exact: true,
 	  sidebar: 'Links',
 	  icon: <LinkOutlined />,
-	  main: () => <MediaPanel commandHandler={commandHandlers.find(commandHandler => commandHandler.mediaType === MediaType.Classic)!}/>
+	  main: () => <MediaPanel commandHandler={commandHandlers.find(commandHandler => commandHandler.mediaType === MediaType.Classic)!}/> // tells router to use a specific command handler for classic link media type
 	},
 	{
 	  path: "/shows",
 	  exact: true,
 	  sidebar: 'Shows',
 	  icon: <VideoCameraOutlined />,
-	  main: () => <MediaPanel commandHandler={commandHandlers.find(commandHandler => commandHandler.mediaType === MediaType.Show)!}/>
+	  main: () => <MediaPanel commandHandler={commandHandlers.find(commandHandler => commandHandler.mediaType === MediaType.Show)!}/> // tells router to use a specific command handler for shows media type
 	},
 	{
 	  path: "/music",
 	  exact: true,
 	  sidebar: 'Music',
 	  icon: <CustomerServiceOutlined />,
-	  main: () => <MediaPanel commandHandler={commandHandlers.find(commandHandler => commandHandler.mediaType === MediaType.Music)!}/>
+	  main: () => <MediaPanel commandHandler={commandHandlers.find(commandHandler => commandHandler.mediaType === MediaType.Music)!}/> // tells router to use a specific command handler for music media type
 	},
 ];
